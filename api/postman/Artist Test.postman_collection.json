@@ -1,0 +1,36 @@
+{
+	"info": {
+		"_postman_id": "c66a45ef-7897-4d89-afd2-e16f83d02f7f",
+		"name": "Artist Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3019847"
+	},
+	"item": [
+		{
+			"name": "Create Artist Test",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"name\":\"ivan\",\n    \"lastName\":\"ivan\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/artists",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"artists"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "806a534f-99f5-4633-8f0a-d9bc7e474e20",
+		"name": "Auth Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3019847"
+	},
+	"item": [
+		{
+			"name": "Singin user Test",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"username\":\"ivan3\",\n    \"password\":\"ivan\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/auth/signIn",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"auth",
+						"signIn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login user Test",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"username\":\"ivan\",\n    \"password\":\"ivan\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/auth/logIn",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"auth",
+						"logIn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login user Test Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"username\":\"ivan\",\n    \"password\":\"ivan\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/auth/refreshAuth",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"auth",
+						"refreshAuth"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
