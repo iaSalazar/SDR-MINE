@@ -9,6 +9,16 @@ class ResourceArtists(Resource):
         artist = Artist.query.all()
         return artists_schema.dump(artist)
 
+    def post(self):
+        new_artist = Artist(
+
+            name=request.json['name'],
+            lastName=request.json['lastName']
+        )
+        db.session.add(new_artist)
+        db.session.commit()
+        return artist_schema.dump(new_artist)
+
 
 class ResourceArtist(Resource):
     def get(self, id_artist):
