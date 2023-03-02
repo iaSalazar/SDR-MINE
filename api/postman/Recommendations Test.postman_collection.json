@@ -1,29 +1,32 @@
 {
 	"info": {
-		"_postman_id": "c66a45ef-7897-4d89-afd2-e16f83d02f7f",
-		"name": "Artist Test",
+		"_postman_id": "4630dded-3519-44c1-b464-c0d3f6caebda",
+		"name": "Recommendations Test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "3019847"
 	},
 	"item": [
 		{
-			"name": "Create Artist Test",
+			"name": "Get recommendation Test",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "{{}}",
+							"value": "{{access_token}}",
 							"type": "string"
 						}
 					]
 				},
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\n    \"name\":\"ivan\",\n    \"lastName\":\"ivan\"\n}\n",
+					"raw": "{\n\n    \"username\":\"ivan2\",\n    \"password\":\"ivan\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -31,12 +34,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/artists",
+					"raw": "{{base_url}}/recommendations/",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"artists"
+						"recommendations",
+						""
 					]
 				}
 			},

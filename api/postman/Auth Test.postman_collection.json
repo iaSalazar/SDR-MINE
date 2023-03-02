@@ -35,6 +35,22 @@
 		},
 		{
 			"name": "Login user Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"access_token\", data.access_token);",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -61,13 +77,34 @@
 			"response": []
 		},
 		{
-			"name": "Login user Test Copy",
+			"name": "Refresh Token Test",
 			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Nzc3Mzk1NDMsImV4cCI6MTY3NzgyNTk0MywianRpIjoiODM3NWY2ZGYtZTU3Mi00MjM1LTg5ZTMtNjQ5YWMwYjcyOTFlIiwiaWQiOjEsInJscyI6IiIsInJmX2V4cCI6MTY4MDMzMTU0M30.4cYuF35TVoqLZBFOGHc2w6c9NzBjaU31blStQSJ5Iic",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "body",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Nzc3MzgxNDIsImV4cCI6MTY3NzgyNDU0MiwianRpIjoiYWIwYzBmMTMtNmUxZi00YWE1LWIzZTItYzMwNWVlMWFlYmQyIiwiaWQiOjEsInJscyI6IiIsInJmX2V4cCI6MTY4MDMzMDE0Mn0.-2gYQdhQHbQzh-4ElDXymn7oUGJl3TWwlrvDch-JfE0",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\n    \"username\":\"ivan\",\n    \"password\":\"ivan\"\n}\n",
+					"raw": "{\n\n    \"acces_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Nzc3Mzk1NDMsImV4cCI6MTY3NzgyNTk0MywianRpIjoiODM3NWY2ZGYtZTU3Mi00MjM1LTg5ZTMtNjQ5YWMwYjcyOTFlIiwiaWQiOjEsInJscyI6IiIsInJmX2V4cCI6MTY4MDMzMTU0M30.4cYuF35TVoqLZBFOGHc2w6c9NzBjaU31blStQSJ5Iic\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
