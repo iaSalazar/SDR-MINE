@@ -8,6 +8,7 @@ from flask_restful import Resource
 class ResourceAuthSignIn(Resource):
 
     def post(self):
+        print(request.json['username'])
         new_user = User(
 
             username=request.json['username'],
@@ -15,6 +16,7 @@ class ResourceAuthSignIn(Resource):
             # roles=request.json['roles']
 
         )
+        print(new_user.username)
         db.session.add(new_user)
 
         db.session.commit()

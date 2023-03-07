@@ -6,6 +6,7 @@ from api.controllers.user_controller import *
 from api.controllers.auth_controller import *
 from api.controllers.recomendationSystem_controller import *
 from api.models.user_model import User
+from flask_cors import CORS
 import os
 
 
@@ -19,6 +20,8 @@ def create_app():
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
     app.config["JWT_ACCESS_LIFESPAN"] = {"hours": 24}
     app.config["JWT_REFRESH_LIFESPAN"] = {"days": 30}
+
+    CORS(app)
     guard.init_app(app, User)
     db.init_app(app)
     ma.init_app(app)
