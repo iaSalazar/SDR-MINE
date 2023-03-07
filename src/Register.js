@@ -72,6 +72,7 @@ const Register = () => {
         JSON.stringify({ username: user, password: pwd }),
         {
           headers: { "Content-Type": "application/json" },
+
           // withCredentials: true,
         }
       );
@@ -80,8 +81,13 @@ const Register = () => {
       console.log(JSON.stringify(response));
       setSuccess(true);
     } catch (err) {
+      console.log(err);
       if (!err?.response) {
         setErrMsg("no server response");
+      }
+      if (!err?.response.status === 500) {
+        setErrMsg("username " + user + " already exist");
+        console.log("ERROR 500");
       } else if (err.response?.status === 409) {
         setErrMsg("Username taken");
       } else {

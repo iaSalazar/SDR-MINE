@@ -8,7 +8,6 @@ from flask_restful import Resource
 class ResourceAuthSignIn(Resource):
 
     def post(self):
-        print(request.json['username'])
         new_user = User(
 
             username=request.json['username'],
@@ -16,11 +15,14 @@ class ResourceAuthSignIn(Resource):
             # roles=request.json['roles']
 
         )
-        print(new_user.username)
-        db.session.add(new_user)
 
-        db.session.commit()
-        return user_schema.dump(new_user)
+        user = User.query.filter(User.username == new_user.username).first()
+        if user == None:
+            db.session.add(new_user)
+            db.session.commit()
+            return user_schema.dump(new_user)
+        elif user != None:
+            return {"error_msg": "Username already registered"}, 409
 
 
 class ResourceAuthLogIn(Resource):
