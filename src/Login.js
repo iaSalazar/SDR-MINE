@@ -42,10 +42,10 @@ const Login = () => {
     } catch (error) {
       if (!error?.response) {
         setErrMsg("No server response");
-      } else if (errMsg?.response === 400) {
+      } else if (error?.response?.status === 400) {
         setErrMsg("Missing username or password");
-      } else if (error.response?.status === 401) {
-        setErrMsg("");
+      } else if (error?.response?.status === 401) {
+        setErrMsg("Wrong username or password");
       } else {
         setErrMsg("Login failed");
       }
