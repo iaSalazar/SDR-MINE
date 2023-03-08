@@ -9,14 +9,14 @@ class ResourceAuthSignIn(Resource):
 
     def post(self):
         try:
-            x = request.json['roles']
-            x.append('user')
-            print(x)
+            requestRoles = request.json['roles']
+            requestRoles.append('user')
+            print(requestRoles)
             new_user = User(
 
                 username=request.json['username'],
                 hashed_password=guard.hash_password(request.json['password']),
-                roles=x
+                roles=requestRoles
 
             )
 
