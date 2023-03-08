@@ -8,21 +8,45 @@ from flask_restful import Resource
 class ResourceAuthSignIn(Resource):
 
     def post(self):
-        new_user = User(
+        try:
+            x = request.json['roles']
+            x.append('user')
+            print(x)
+            new_user = User(
 
-            username=request.json['username'],
-            hashed_password=guard.hash_password(request.json['password'])
-            # roles=request.json['roles']
+                username=request.json['username'],
+                hashed_password=guard.hash_password(request.json['password']),
+                roles=x
 
-        )
+            )
 
-        user = User.query.filter(User.username == new_user.username).first()
-        if user == None:
-            db.session.add(new_user)
-            db.session.commit()
-            return user_schema.dump(new_user)
-        elif user != None:
-            return {"error_msg": "Username already registered"}, 409
+            user = User.query.filter(
+                User.username == new_user.username).first()
+            if user == None:
+                db.session.add(new_user)
+                db.session.commit()
+                return user_schema.dump(new_user)
+            elif user != None:
+                return {"error_msg": "Username already registered"}, 409
+
+        except KeyError:
+
+            new_user = User(
+
+                username=request.json['username'],
+                hashed_password=guard.hash_password(request.json['password']),
+                roles=['user']
+
+            )
+
+            user = User.query.filter(
+                User.username == new_user.username).first()
+            if user == None:
+                db.session.add(new_user)
+                db.session.commit()
+                return user_schema.dump(new_user)
+            elif user != None:
+                return {"error_msg": "Username already registered"}, 409
 
 
 class ResourceAuthLogIn(Resource):
@@ -41,7 +65,7 @@ class ResourceAuthLogIn(Resource):
         usert = guard.authenticate(username, password)
         user = User.query.filter_by(username=username).first()
         ret = {'access_token': guard.encode_jwt_token(usert),
-               'id': user.id}
+               'id': user.id, 'roles': user.roles, 'username': user.username}
         return ret, 200
 
 
