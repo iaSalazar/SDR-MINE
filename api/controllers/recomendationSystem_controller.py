@@ -31,4 +31,9 @@ class ResourceRecommendations(Resource):
         }]
 
 
+class ResourceItemItemRecommendations(Resource):
+    pass
+
+
 api.add_resource(ResourceRecommendations, '/api/recommendations/')
+api.add_resource(ResourceItemItemRecommendations, '/api/recommendations/')
