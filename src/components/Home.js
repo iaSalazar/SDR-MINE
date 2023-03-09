@@ -26,7 +26,7 @@ const Home = () => {
         .get("/api/recommendations/", {
           headers: {
             Authorization:
-              "Bearer " + sessionStorage.getItem("token").replace('"', ""),
+              "Bearer " + sessionStorage.getItem("token").replaceAll('"', ""),
           },
         })
         .then(function (response) {
