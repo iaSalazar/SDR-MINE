@@ -1,14 +1,12 @@
 import { useNavigate, Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import AuthContext from "../context/AuthProvider";
+import { useEffect, useState } from "react";
 import axios from "../api/axios";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 import useAuth from "../hooks/useAuth";
 
 const Home = () => {
-  const { auth } = useAuth();
-  console.log(auth?.id);
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth } = useAuth();
+  console.log(setAuth?.id);
   const navigate = useNavigate();
 
   const [data, setData] = useState([]);
@@ -17,7 +15,8 @@ const Home = () => {
     // if used in more components, this should be in context
     // axios to /logout endpoint
     setAuth({});
-    navigate("/linkpage");
+
+    navigate("/login");
   };
 
   useEffect(() => {
