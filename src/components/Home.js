@@ -1,10 +1,14 @@
 import { useNavigate, Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthProvider";
+import axios from "../api/axios";
+import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 
 const Home = () => {
   const { setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const [data, setData] = useState([]);
 
   const logout = async () => {
     // if used in more components, this should be in context
@@ -13,8 +17,20 @@ const Home = () => {
     navigate("/linkpage");
   };
 
+  useEffect(() => {
+    try {
+      const response = axios
+        .get("/api/recommendations/")
+        .then(function (response) {
+          console.log(response.data);
+          setData(response.data);
+        });
+      console.log(JSON.stringify(response?.data));
+    } catch (error) {}
+  }, []);
+
   return (
-    <section>
+    <section className="Home">
       <h1>Home</h1>
       <br />
       <p>You are logged in!</p>
@@ -29,6 +45,24 @@ const Home = () => {
       <div className="flexGrow">
         <button onClick={logout}>Sign Out</button>
       </div>
+      <aside>
+        <MDBTable bordered striped hover>
+          <MDBTableHead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">NAME</th>
+            </tr>
+          </MDBTableHead>
+          <MDBTableBody>
+            {data.map((item, index) => (
+              <tr key={index}>
+                <td>{item.id}</td>
+                <td>{item.username}</td>
+              </tr>
+            ))}
+          </MDBTableBody>
+        </MDBTable>
+      </aside>
     </section>
   );
 };

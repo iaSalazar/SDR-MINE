@@ -14,7 +14,7 @@ html {
 
 body {
   min-height: 100vh;
-  background-color: dodgerblue;
+  background-color: rgb(9, 141, 20);
 }
 
 .App {
@@ -35,7 +35,28 @@ section {
   justify-content: flex-start;
   padding: 1rem;
   background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 25px;
+  border-style: ridge;
+
 }
+
+hover {
+  background-color: bisque;
+}
+
+/* section.Home {
+  width: 100%;
+  max-width: 800px;
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 25px;
+  border-style: ridge;
+
+} */
 
 form {
   display: flex;
@@ -112,4 +133,9 @@ button {
 
 .line {
   display: inline-block;
+}
+
+.table-bordered {
+  border: 1px solid #ddd;
+  padding: 8px;
 }
