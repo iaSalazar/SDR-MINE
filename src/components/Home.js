@@ -3,8 +3,11 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthProvider";
 import axios from "../api/axios";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
+import useAuth from "../hooks/useAuth";
 
 const Home = () => {
+  const { auth } = useAuth();
+  console.log(auth?.id);
   const { setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
 
