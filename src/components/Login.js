@@ -42,6 +42,7 @@ const Login = () => {
       const roles = JSON.stringify(response?.data?.roles);
       const id = JSON.stringify(response?.data?.id);
       const username = JSON.stringify(response?.data?.username);
+      sessionStorage.setItem("token", access_token);
       setAuth({ access_token, roles, id, username });
       setUser("");
       setPwd("");

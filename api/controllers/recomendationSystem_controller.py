@@ -7,7 +7,7 @@ import flask_praetorian
 
 
 class ResourceRecommendations(Resource):
-    # @flask_praetorian.auth_required
+    @flask_praetorian.auth_required
     def get(self):
         return [{
             "username": "Chopin",

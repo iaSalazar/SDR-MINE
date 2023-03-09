@@ -21,8 +21,14 @@ const Home = () => {
 
   useEffect(() => {
     try {
+      console.log(sessionStorage.getItem("token").replaceAll('"', ""));
       const response = axios
-        .get("/api/recommendations/")
+        .get("/api/recommendations/", {
+          headers: {
+            Authorization:
+              "Bearer " + sessionStorage.getItem("token").replace('"', ""),
+          },
+        })
         .then(function (response) {
           console.log(response.data);
           setData(response.data);
