@@ -1,5 +1,61 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem 0.5rem;
+  background-image: linear-gradient(#d7dcb6, #9DC08B,#609966,#40513B)
+}
+
+.auth-form-container, .login-form, .register-form{
+  display: flex;
+  flex-direction: column;
+  
+}
+
+@media screen and (min-width: 600px){
+  .auth-form-container {
+      padding: 1.5rem;
+      border: 1px solid #fff;
+      border-radius: 10px;
+      margin: 0.5rem;
+  
+    }
+}
+
+
+label {
+  text-align: left;
+  padding: 0.3rem 0;
+}
+
+input {
+  margin: 0.5rem 0;
+  padding: 1rem 0.5rem;
+  border: none;
+  border-radius: 10px;
+
+}
+
+button {
+  border: none;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #609966;
+}
+
+.link-btn {
+  background-color: none;
+  text-decoration: underline;
+  color: white;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -12,19 +68,7 @@ html {
   color: #fff;
 }
 
-body {
-  min-height: 100vh;
-  background-color: rgb(9, 141, 20);
-}
 
-.App {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 1rem 0.5rem;
-}
 
 section {
   width: 100%;
@@ -44,19 +88,7 @@ hover {
   background-color: bisque;
 }
 
-/* section.Home {
-  width: 100%;
-  max-width: 800px;
-  min-height: 800px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 25px;
-  border-style: ridge;
 
-} */
 
 form {
   display: flex;
@@ -81,14 +113,7 @@ textarea {
   border-radius: 0.5rem;
 }
 
-label,
-button {
-  margin-top: 1rem;
-}
 
-button {
-  padding: 0.5rem;
-}
 
 .instructions {
   font-size: 0.75rem;

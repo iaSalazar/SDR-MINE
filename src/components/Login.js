@@ -62,7 +62,7 @@ const Login = () => {
   };
 
   return (
-    <section>
+    <div className="auth-form-container">
       <p
         ref={errRef}
         className={errMsg ? "errmsg" : "offscreen"}
@@ -70,12 +70,13 @@ const Login = () => {
       >
         {errMsg}
       </p>
-      <h1>Log in</h1>
-      <form onSubmit={handleSubmit}>
+      <h1>Login</h1>
+      <form className="login-form" onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
         <input
           type="text"
-          id=""
+          placeholder="yourUserName"
+          id="username"
           ref={userRef}
           autoComplete="off"
           onChange={(e) => setUser(e.target.value)}
@@ -88,9 +89,10 @@ const Login = () => {
           id="password"
           onChange={(e) => setPwd(e.target.value)}
           value={pwd}
+          placeholder="******"
           required
         />
-        <button>Sign In</button>
+        <button>Log In</button>
       </form>
       <p>
         Need an Account?
@@ -100,7 +102,47 @@ const Login = () => {
           <a href="/register">Sign Up</a>
         </span>
       </p>
-    </section>
+    </div>
+
+    // <section>
+    //   <p
+    //     ref={errRef}
+    //     className={errMsg ? "errmsg" : "offscreen"}
+    //     aria-live="assertive"
+    //   >
+    //     {errMsg}
+    //   </p>
+    //   <h1>Log in</h1>
+    //   <form onSubmit={handleSubmit}>
+    //     <label htmlFor="username">Username:</label>
+    //     <input
+    //       type="text"
+    //       id=""
+    //       ref={userRef}
+    //       autoComplete="off"
+    //       onChange={(e) => setUser(e.target.value)}
+    //       value={user}
+    //       required
+    //     />
+    //     <label htmlFor="password">Password:</label>
+    //     <input
+    //       type="password"
+    //       id="password"
+    //       onChange={(e) => setPwd(e.target.value)}
+    //       value={pwd}
+    //       required
+    //     />
+    //     <button>Sign In</button>
+    //   </form>
+    //   <p>
+    //     Need an Account?
+    //     <br />
+    //     <span className="line">
+    //       {/*TODO*/}
+    //       <a href="/register">Sign Up</a>
+    //     </span>
+    //   </p>
+    // </section>
   );
 };
 
