@@ -1,4 +1,6 @@
 
+import json
+import pickle
 from flask_restful import Resource
 import pandas as pd
 from ..app.extensions import db, api, guard
@@ -47,8 +49,9 @@ api.add_resource(ResourceItemItemRecommendations,
 
 
 def recommend_movies(user, num_recommended_movies, df, df1):
-    my_dict = {"listened_artist": [], "recomended_movies": [],
-               "recommended_movies_rank": [], "raiting": []}
+    data = []
+    my_dict = {"listened_artist": [], "recomended_movies": []
+               }
     print('The list of the Movies {} Has Watched \n'.format(user))
 
     for m in df[df[user] > 0][user].index.tolist():
@@ -75,9 +78,14 @@ def recommend_movies(user, num_recommended_movies, df, df1):
 
         print('{}: {} - predicted rating:{}'.format(rank,
               recommended_movie[0], recommended_movie[1]))
-        my_dict["recomended_movies"].append(recommended_movie[0])
-        my_dict["recommended_movies_rank"].append(rank)
-        my_dict["raiting"].append(recommended_movie[1])
+
+        item = {}
+        item["recomended_movies"] = recommended_movie[0]
+        item["recommended_movies_rank"] = rank
+        item["raiting"] = recommended_movie[1]
+        data.append(item)
+
+        my_dict["recomended_movies"].append(item)
 
         rank = rank + 1
     return my_dict
@@ -85,28 +93,21 @@ def recommend_movies(user, num_recommended_movies, df, df1):
 
 def movie_recommender(user, num_neighbors, num_recommendation):
 
-    ratings = pd.read_csv(
-        '/home/ivs/Documents/MyProjects/SDR/sdr-taller-1/api/data/preprocessed_user_item_rating.csv')
-    agg_ratings = ratings.groupby('artist-name').agg(mean_rating=('rating', 'mean'),
-                                                     number_of_ratings=('rating', 'count')).reset_index().sort_values('number_of_ratings',  ascending=False)
-    ratings_final = pd.merge(
-        ratings, agg_ratings[['artist-name']], on='artist-name', how='inner')
+    print("Reading Matrix")
+    matrix = pd.read_csv(
+        '/home/ivs/Documents/MyProjects/SDR/sdr-taller-1/api/utils/item-item-matrix.csv', index_col="artist-name")
 
-    ratings_final.info()
-    matrix = ratings_final.pivot_table(
-        index='artist-name', columns='userid', values='rating')
     df = matrix.fillna(0)
     df1 = df.copy()
-
+    print("Loading KNN model")
     number_neighbors = num_neighbors
-
-    knn = NearestNeighbors(metric='cosine', algorithm='brute')
-    knn.fit(df.values)
+    knn = pickle.load(open(
+        '/home/ivs/Documents/MyProjects/SDR/sdr-taller-1/api/utils/item-item-knn.pkl', 'rb'))
     distances, indices = knn.kneighbors(
         df.values, n_neighbors=number_neighbors)
 
     user_index = df.columns.tolist().index(user)
-
+    print("predicting all non listened artist")
     for m, t in list(enumerate(df.index)):
         if df.iloc[m, user_index] == 0:
             sim_movies = indices[m].tolist()
