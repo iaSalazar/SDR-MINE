@@ -18,4 +18,4 @@ class ResourceUser(Resource):
 
 
 api.add_resource(ResourceUsers, '/api/users/')
-api.add_resource(ResourceUser, '/api/users/<int:id_profesor>/')
+api.add_resource(ResourceUser, '/api/users/<int:id_user>/')

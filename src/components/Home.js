@@ -1,12 +1,13 @@
 import { useNavigate, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "../api/axios";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 import useAuth from "../hooks/useAuth";
 
 const Home = () => {
-  const { setAuth } = useAuth();
-  console.log(setAuth?.id);
+  const { auth, setAuth } = useAuth();
+  console.log(auth?.id);
+  const username = useRef(auth.username);
   const navigate = useNavigate();
 
   const [data, setData] = useState([]);
@@ -42,18 +43,18 @@ const Home = () => {
   useEffect(() => {
     try {
       console.log(sessionStorage.getItem("token").replaceAll('"', ""));
-      const response = axios
-        .get("/api/recommendations/item-item", {
-          headers: {
-            Authorization:
-              "Bearer " + sessionStorage.getItem("token").replaceAll('"', ""),
-          },
-        })
-        .then(function (response) {
-          console.log(response.data);
-          setDataItemITem(response.data);
-        });
+      const response = async () =>
+        await axios
+          .post("/api/recommendations/item-item", {
+            headers: { "Content-Type": "application/json" },
+            body: { username: username.current },
+          })
+          .then(function (response) {
+            console.log(response.data);
+            setDataItemITem(response.data);
+          });
       console.log(JSON.stringify(response?.data));
+      response();
     } catch (error) {}
   }, []);
 
@@ -61,7 +62,7 @@ const Home = () => {
     <section className="Home">
       <h1>Home</h1>
       <br />
-      <p>You are logged in!</p>
+      <p>You are logged in as {username.current}!</p>
       <br />
 
       <Link to="/admin">Go to the Admin page</Link>
@@ -79,7 +80,7 @@ const Home = () => {
           </MDBTableHead>
           <MDBTableBody>
             {data.map((item, index) => (
-              <tr className="tr-hover" key={index}>
+              <tr key={index}>
                 <td>{item.id}</td>
                 <td>{item.username}</td>
               </tr>
@@ -98,10 +99,10 @@ const Home = () => {
             </tr>
           </MDBTableHead>
           <MDBTableBody>
-            {dataItemItem?.recomended_movies?.map((item, index) => (
+            {dataItemItem?.recomended_artists?.map((item, index) => (
               <tr key={index}>
-                <td>{item?.recommended_movies_rank}</td>
-                <td>{item?.recomended_movies}</td>
+                <td>{item?.recommended_artists_rank}</td>
+                <td>{item?.recomended_artists}</td>
                 <td>{item?.raiting}</td>
               </tr>
             ))}
