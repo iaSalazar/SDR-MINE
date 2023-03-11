@@ -13,6 +13,8 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [dataItemItem, setDataItemITem] = useState([]);
 
+  const [dataGeneric, setDataGeneric] = useState([]);
+
   const logout = async () => {
     // if used in more components, this should be in context
     // axios to /logout endpoint
@@ -21,6 +23,26 @@ const Home = () => {
 
     navigate("/login");
   };
+
+  useEffect(() => {
+    try {
+      console.log(sessionStorage.getItem("token").replaceAll('"', ""));
+      const response = async () =>
+        await axios
+          .get("/api/recommendations/generic", {
+            headers: {
+              Authorization:
+                "Bearer " + sessionStorage.getItem("token").replaceAll('"', ""),
+            },
+          })
+          .then(function (response) {
+            console.log(response.data);
+            setDataGeneric(response.data);
+          });
+      console.log(JSON.stringify(response?.data));
+      response();
+    } catch (error) {}
+  }, []);
 
   useEffect(() => {
     try {
@@ -46,7 +68,11 @@ const Home = () => {
       const response = async () =>
         await axios
           .post("/api/recommendations/item-item", {
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              Authorization:
+                "Bearer " + sessionStorage.getItem("token").replaceAll('"', ""),
+            },
             body: { username: username.current },
           })
           .then(function (response) {
@@ -104,6 +130,27 @@ const Home = () => {
                 <td>{item?.recommended_artists_rank}</td>
                 <td>{item?.recomended_artists}</td>
                 <td>{item?.raiting}</td>
+              </tr>
+            ))}
+          </MDBTableBody>
+        </MDBTable>
+      </aside>
+      <h2>Generic</h2>
+      <aside>
+        <MDBTable bordered striped hover>
+          <MDBTableHead>
+            <tr>
+              <th scope="col">ARTIST NAME</th>
+              <th scope="col">MEAN RATING</th>
+              <th scope="col">NUMBER OF RATINGS</th>
+            </tr>
+          </MDBTableHead>
+          <MDBTableBody>
+            {dataGeneric?.map((item, index) => (
+              <tr key={index}>
+                <td>{item?.artist_name}</td>
+                <td>{item?.mean_rating}</td>
+                <td>{item?.number_of_ratings}</td>
               </tr>
             ))}
           </MDBTableBody>

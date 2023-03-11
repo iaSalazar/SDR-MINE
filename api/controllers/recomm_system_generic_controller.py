@@ -16,8 +16,9 @@ class ResourceGenericRecommendations(Resource):
     def get(self):
 
         ratings = pd.read_csv(
-            '/home/ivs/Documents/MyProjects/SDR/sdr-taller-1/api/data/preprocessed_user_item_rating.csv')
-        agg_ratings = ratings.groupby('artist-name').agg(mean_rating=('rating', 'mean'),
+            '/home/ivs/Documents/MyProjects/SDR/sdr-taller-1/api/data/preprocessed_user_item_rating.csv').rename(columns={"artist-name": "artist_name"})
+
+        agg_ratings = ratings.groupby('artist_name').agg(mean_rating=('rating', 'mean'),
                                                          number_of_ratings=('rating', 'count')).reset_index().sort_values('number_of_ratings',  ascending=False)
         agg_ratings = agg_ratings[agg_ratings['number_of_ratings'] > 10]
 
