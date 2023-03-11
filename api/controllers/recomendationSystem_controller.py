@@ -39,7 +39,7 @@ class ResourceItemItemRecommendations(Resource):
 
     @flask_praetorian.auth_required
     def get(self):
-        my_dict = movie_recommender('user_001000', 3, 4)
+        my_dict = movie_recommender('user_001000', 3, 5)
         return my_dict  # {"Termino": "SI"}
 
 

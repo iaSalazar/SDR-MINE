@@ -79,7 +79,7 @@ const Home = () => {
           </MDBTableHead>
           <MDBTableBody>
             {data.map((item, index) => (
-              <tr key={index}>
+              <tr className="tr-hover" key={index}>
                 <td>{item.id}</td>
                 <td>{item.username}</td>
               </tr>

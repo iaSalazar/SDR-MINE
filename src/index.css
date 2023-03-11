@@ -72,13 +72,13 @@ html {
 
 section {
   width: 100%;
-  max-width: 420px;
-  min-height: 400px;
+  max-width: 820px;
+  min-height: 800px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.15);
   border-radius: 25px;
   border-style: ridge;
 
@@ -164,3 +164,24 @@ textarea {
   border: 1px solid #ddd;
   padding: 8px;
 }
+
+
+td,th{
+  border:1px #fff solid;
+  text-align: left;
+  padding: 0.5rem;
+}
+
+table {
+  border-collapse: collapse;
+
+
+}
+
+tr:nth-child(even){
+  background-color: rgba(0, 0, 0, 0.25);
+}
+tr:hover{
+  background-color: rgba(0, 0, 0, 0.5)
+}
+
