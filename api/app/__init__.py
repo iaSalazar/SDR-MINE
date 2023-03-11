@@ -4,7 +4,7 @@ from .extensions import db, ma, api, guard
 from api.controllers.artist_controller import *
 from api.controllers.user_controller import *
 from api.controllers.auth_controller import *
-from api.controllers.recomendationSystem_controller import *
+from api.controllers.recomm_system_ItemItem_controller import *
 from api.models.user_model import User
 from flask_cors import CORS
 import os

@@ -99,8 +99,10 @@ def artist_recommender(user, num_neighbors, num_recommendation):
     print("Reading Matrix")
     matrix = pd.read_csv(
         './utils/item-item-matrix.csv', index_col="artist-name")
-    user_exist = user in matrix.index
-    if not user_exist:
+
+    try:
+        matrix.columns.tolist().index(user)
+    except ValueError as e:
         print("ES FALSO")
         data = []
         my_dict = {"listened_artist": [], "recomended_artists": []
@@ -111,7 +113,6 @@ def artist_recommender(user, num_neighbors, num_recommendation):
         item["raiting"] = ""
         data.append(item)
         my_dict["recomended_artists"].append(item)
-
         return my_dict
 
     df = matrix.fillna(0)
