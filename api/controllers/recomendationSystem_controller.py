@@ -1,5 +1,6 @@
 
 import json
+import os
 import pickle
 from flask_restful import Resource
 import pandas as pd
@@ -54,7 +55,7 @@ def recommend_artists(user, num_recommended_artists, df, df1):
     data = []
     my_dict = {"listened_artist": [], "recomended_artists": []
                }
-    print('The list of the artists {} Has Watched \n'.format(user))
+    # print('The list of the artists {} Has Watched \n'.format(user))
 
     for m in df[df[user] > 0][user].index.tolist():
         my_dict["listened_artist"].append(m)
@@ -97,14 +98,28 @@ def artist_recommender(user, num_neighbors, num_recommendation):
 
     print("Reading Matrix")
     matrix = pd.read_csv(
-        '/home/ivs/Documents/MyProjects/SDR/sdr-taller-1/api/utils/item-item-matrix.csv', index_col="artist-name")
+        './utils/item-item-matrix.csv', index_col="artist-name")
+    user_exist = user in matrix.index
+    if not user_exist:
+        print("ES FALSO")
+        data = []
+        my_dict = {"listened_artist": [], "recomended_artists": []
+                   }
+        item = {}
+        item["recomended_artists"] = "Please score some artists"
+        item["recommended_artists_rank"] = ""
+        item["raiting"] = ""
+        data.append(item)
+        my_dict["recomended_artists"].append(item)
+
+        return my_dict
 
     df = matrix.fillna(0)
     df1 = df.copy()
     print("Loading KNN model")
     number_neighbors = num_neighbors
     knn = pickle.load(open(
-        '/home/ivs/Documents/MyProjects/SDR/sdr-taller-1/api/utils/item-item-knn.pkl', 'rb'))
+        './utils/item-item-knn.pkl', 'rb'))
     distances, indices = knn.kneighbors(
         df.values, n_neighbors=number_neighbors)
 
