@@ -10,6 +10,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const [data, setData] = useState([]);
+  const [dataItemItem, setDataItemITem] = useState([]);
 
   const logout = async () => {
     // if used in more components, this should be in context
@@ -50,7 +51,7 @@ const Home = () => {
         })
         .then(function (response) {
           console.log(response.data);
-          // setData(response.data);
+          setDataItemITem(response.data);
         });
       console.log(JSON.stringify(response?.data));
     } catch (error) {}
@@ -81,6 +82,27 @@ const Home = () => {
               <tr key={index}>
                 <td>{item.id}</td>
                 <td>{item.username}</td>
+              </tr>
+            ))}
+          </MDBTableBody>
+        </MDBTable>
+      </aside>
+      <h2>Item-Item</h2>
+      <aside>
+        <MDBTable bordered striped hover>
+          <MDBTableHead>
+            <tr>
+              <th scope="col">PREDICTED RANK</th>
+              <th scope="col">ARTIST</th>
+              <th scope="col">PREDICTED RAITING</th>
+            </tr>
+          </MDBTableHead>
+          <MDBTableBody>
+            {dataItemItem?.recomended_movies?.map((item, index) => (
+              <tr key={index}>
+                <td>{item?.recommended_movies_rank}</td>
+                <td>{item?.recomended_movies}</td>
+                <td>{item?.raiting}</td>
               </tr>
             ))}
           </MDBTableBody>
