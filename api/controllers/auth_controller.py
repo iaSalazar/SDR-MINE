@@ -64,6 +64,8 @@ class ResourceAuthLogIn(Resource):
         password = request.json.get("password", None)
         usert = guard.authenticate(username, password)
         user = User.query.filter_by(username=username).first()
+        print(user.roles.replace('{', '').replace('}', '').split(','))
+        roles = user.roles.replace('{', '').replace('}', '').split(',')
         ret = {'access_token': guard.encode_jwt_token(usert),
                'id': user.id, 'roles': user.roles, 'username': user.username}
         return ret, 200
