@@ -38,6 +38,24 @@ const Home = () => {
     } catch (error) {}
   }, []);
 
+  useEffect(() => {
+    try {
+      console.log(sessionStorage.getItem("token").replaceAll('"', ""));
+      const response = axios
+        .get("/api/recommendations/item-item", {
+          headers: {
+            Authorization:
+              "Bearer " + sessionStorage.getItem("token").replaceAll('"', ""),
+          },
+        })
+        .then(function (response) {
+          console.log(response.data);
+          // setData(response.data);
+        });
+      console.log(JSON.stringify(response?.data));
+    } catch (error) {}
+  }, []);
+
   return (
     <section className="Home">
       <h1>Home</h1>
