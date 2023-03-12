@@ -13,7 +13,7 @@ class ResourceArtists(Resource):
         new_artist = Artist(
 
             name=request.json['name'],
-            lastName=request.json['lastName']
+            # lastName=request.json['lastName']
         )
         db.session.add(new_artist)
         db.session.commit()
