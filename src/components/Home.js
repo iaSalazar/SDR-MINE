@@ -10,7 +10,7 @@ const Home = () => {
   const username = useRef(auth.username);
   const navigate = useNavigate();
 
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [dataItemItem, setDataItemITem] = useState([]);
 
   const [dataGeneric, setDataGeneric] = useState([]);
@@ -44,23 +44,23 @@ const Home = () => {
     } catch (error) {}
   }, []);
 
-  useEffect(() => {
-    try {
-      console.log(sessionStorage.getItem("token").replaceAll('"', ""));
-      const response = axios
-        .get("/api/recommendations/", {
-          headers: {
-            Authorization:
-              "Bearer " + sessionStorage.getItem("token").replaceAll('"', ""),
-          },
-        })
-        .then(function (response) {
-          console.log(response.data);
-          setData(response.data);
-        });
-      console.log(JSON.stringify(response?.data));
-    } catch (error) {}
-  }, []);
+  // useEffect(() => {
+  //   try {
+  //     console.log(sessionStorage.getItem("token").replaceAll('"', ""));
+  //     const response = axios
+  //       .get("/api/recommendations/", {
+  //         headers: {
+  //           Authorization:
+  //             "Bearer " + sessionStorage.getItem("token").replaceAll('"', ""),
+  //         },
+  //       })
+  //       .then(function (response) {
+  //         console.log(response.data);
+  //         setData(response.data);
+  //       });
+  //     console.log(JSON.stringify(response?.data));
+  //   } catch (error) {}
+  // }, []);
 
   useEffect(() => {
     try {
@@ -151,6 +151,19 @@ const Home = () => {
                 <td>{item?.artist_name}</td>
                 <td>{item?.mean_rating}</td>
                 <td>{item?.number_of_ratings}</td>
+              </tr>
+            ))}
+          </MDBTableBody>
+        </MDBTable>
+      </aside>
+      <aside>
+        <h2>History</h2>
+        <MDBTable bordered striped hover>
+          <MDBTableBody>
+            {dataItemItem?.listened_artist?.map((item, index) => (
+              <tr key={index}>
+                <td>{item.rated_artist}</td>
+                <td>{item.rating}</td>
               </tr>
             ))}
           </MDBTableBody>

@@ -56,10 +56,18 @@ def recommend_artists(user, num_recommended_artists, df, df1):
     my_dict = {"listened_artist": [], "recomended_artists": []
                }
     # print('The list of the artists {} Has Watched \n'.format(user))
+    listened_songs = df[df[user] > 0][user]
+    for idx, artist in enumerate(listened_songs.index.tolist()):
 
-    for m in df[df[user] > 0][user].index.tolist():
-        my_dict["listened_artist"].append(m)
-        print(m)
+        rating = listened_songs.iloc[idx]
+
+        item_history = {}
+        item_history["rated_artist"] = artist
+        item_history["rating"] = rating
+        data.append(item_history)
+
+        my_dict["listened_artist"].append(item_history)
+        # print(m)
 
     print('\n')
 
