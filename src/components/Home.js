@@ -10,7 +10,6 @@ const Home = () => {
   const username = useRef(auth.username);
   const navigate = useNavigate();
 
-  // const [data, setData] = useState([]);
   const [dataItemItem, setDataItemITem] = useState([]);
 
   const [dataGeneric, setDataGeneric] = useState([]);
@@ -43,24 +42,6 @@ const Home = () => {
       response();
     } catch (error) {}
   }, []);
-
-  // useEffect(() => {
-  //   try {
-  //     console.log(sessionStorage.getItem("token").replaceAll('"', ""));
-  //     const response = axios
-  //       .get("/api/recommendations/", {
-  //         headers: {
-  //           Authorization:
-  //             "Bearer " + sessionStorage.getItem("token").replaceAll('"', ""),
-  //         },
-  //       })
-  //       .then(function (response) {
-  //         console.log(response.data);
-  //         setData(response.data);
-  //       });
-  //     console.log(JSON.stringify(response?.data));
-  //   } catch (error) {}
-  // }, []);
 
   useEffect(() => {
     try {
@@ -96,24 +77,7 @@ const Home = () => {
       <div className="flexGrow">
         <button onClick={logout}>Sign Out</button>
       </div>
-      {/* <aside>
-        <MDBTable bordered striped hover>
-          <MDBTableHead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">NAME</th>
-            </tr>
-          </MDBTableHead>
-          <MDBTableBody>
-            {data.map((item, index) => (
-              <tr key={index}>
-                <td>{item.id}</td>
-                <td>{item.username}</td>
-              </tr>
-            ))}
-          </MDBTableBody>
-        </MDBTable>
-      </aside> */}
+
       <h2>Item-Item</h2>
       <aside>
         <MDBTable bordered striped hover>

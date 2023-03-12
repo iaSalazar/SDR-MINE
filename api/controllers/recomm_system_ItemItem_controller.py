@@ -56,7 +56,7 @@ def recommend_artists(user, num_recommended_artists, df, df1):
     my_dict = {"listened_artist": [], "recomended_artists": []
                }
     # print('The list of the artists {} Has Watched \n'.format(user))
-    listened_songs = df[df[user] > 0][user]
+    listened_songs = df[df[user] > 0][user].sort_values(ascending=False)
     for idx, artist in enumerate(listened_songs.index.tolist()):
 
         rating = listened_songs.iloc[idx]
