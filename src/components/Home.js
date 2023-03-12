@@ -96,7 +96,7 @@ const Home = () => {
       <div className="flexGrow">
         <button onClick={logout}>Sign Out</button>
       </div>
-      <aside>
+      {/* <aside>
         <MDBTable bordered striped hover>
           <MDBTableHead>
             <tr>
@@ -113,7 +113,7 @@ const Home = () => {
             ))}
           </MDBTableBody>
         </MDBTable>
-      </aside>
+      </aside> */}
       <h2>Item-Item</h2>
       <aside>
         <MDBTable bordered striped hover>
