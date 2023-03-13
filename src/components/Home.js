@@ -73,6 +73,7 @@ const Home = () => {
       <br />
 
       <Link to="/admin">Go to the Admin page</Link>
+      <Link to="/rate">rate some artist</Link>
       <br />
       <div className="flexGrow">
         <button onClick={logout}>Sign Out</button>

@@ -44,13 +44,13 @@ def callArtistApi(row):
 
 
 all_rows = len(df)
-for i in range(all_rows):
+# for i in range(all_rows):
 
-    row_dict = dict(df.iloc[i])
+#     row_dict = dict(df.iloc[i])
 
-    row_dict = json.dumps(row_dict)
-    print(row_dict)
-    callUserApi(row_dict)
+#     row_dict = json.dumps(row_dict)
+#     print(row_dict)
+#     callUserApi(row_dict)
 
 for artist in artists:
     row_dict = {"name": artist}
