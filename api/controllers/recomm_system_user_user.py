@@ -13,3 +13,7 @@ from sklearn.neighbors import NearestNeighbors
 class ResourceUserUserRecommendations(Resource):
     # TODO
     pass
+
+
+api.add_resource(ResourceUserUserRecommendations,
+                 '/api/recommendations/user-user')
