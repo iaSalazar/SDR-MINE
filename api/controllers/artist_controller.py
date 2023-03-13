@@ -53,5 +53,24 @@ class ResourceArtist(Resource):
         return artist_schema.dump(new_artist)
 
 
+class ResourceArtistRaiting(Resource):
+
+    def post(self):
+        artist = Artist(
+
+            name=request.json['name'],
+            # lastName=request.json['lastName']
+        )
+        artistName = artist.name
+        rating = request.json['rating']
+
+        print(rating)
+        return [{
+            "name": artistName,
+            "rating": rating
+        }]
+
+
 api.add_resource(ResourceArtists, '/api/artists')
+api.add_resource(ResourceArtistRaiting, '/api/artists/rate')
 api.add_resource(ResourceArtist, '/api/artists/<int:id_artist>')
