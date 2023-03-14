@@ -26,7 +26,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\n    \"username\":\"ivan2\",\n    \"password\":\"ivan\"\n}\n",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -41,6 +41,86 @@
 					"path": [
 						"recommendations",
 						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get recom-generic Test",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/recommendations/generic",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"recommendations",
+						"generic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get recom-item-item Test",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/recommendations/item-item",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"recommendations",
+						"item-item"
 					]
 				}
 			},

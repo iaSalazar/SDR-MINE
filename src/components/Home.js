@@ -10,7 +10,6 @@ const Home = () => {
   const username = useRef(auth.username);
   const navigate = useNavigate();
 
-  const [data, setData] = useState([]);
   const [dataItemItem, setDataItemITem] = useState([]);
 
   const [dataGeneric, setDataGeneric] = useState([]);
@@ -47,24 +46,6 @@ const Home = () => {
   useEffect(() => {
     try {
       console.log(sessionStorage.getItem("token").replaceAll('"', ""));
-      const response = axios
-        .get("/api/recommendations/", {
-          headers: {
-            Authorization:
-              "Bearer " + sessionStorage.getItem("token").replaceAll('"', ""),
-          },
-        })
-        .then(function (response) {
-          console.log(response.data);
-          setData(response.data);
-        });
-      console.log(JSON.stringify(response?.data));
-    } catch (error) {}
-  }, []);
-
-  useEffect(() => {
-    try {
-      console.log(sessionStorage.getItem("token").replaceAll('"', ""));
       const response = async () =>
         await axios
           .post("/api/recommendations/item-item", {
@@ -92,28 +73,12 @@ const Home = () => {
       <br />
 
       <Link to="/admin">Go to the Admin page</Link>
+      <Link to="/rate">rate some artist</Link>
       <br />
       <div className="flexGrow">
         <button onClick={logout}>Sign Out</button>
       </div>
-      {/* <aside>
-        <MDBTable bordered striped hover>
-          <MDBTableHead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">NAME</th>
-            </tr>
-          </MDBTableHead>
-          <MDBTableBody>
-            {data.map((item, index) => (
-              <tr key={index}>
-                <td>{item.id}</td>
-                <td>{item.username}</td>
-              </tr>
-            ))}
-          </MDBTableBody>
-        </MDBTable>
-      </aside> */}
+
       <h2>Item-Item</h2>
       <aside>
         <MDBTable bordered striped hover>
@@ -151,6 +116,19 @@ const Home = () => {
                 <td>{item?.artist_name}</td>
                 <td>{item?.mean_rating}</td>
                 <td>{item?.number_of_ratings}</td>
+              </tr>
+            ))}
+          </MDBTableBody>
+        </MDBTable>
+      </aside>
+      <aside>
+        <h2>History</h2>
+        <MDBTable bordered striped hover>
+          <MDBTableBody>
+            {dataItemItem?.listened_artist?.map((item, index) => (
+              <tr key={index}>
+                <td>{item.rated_artist}</td>
+                <td>{item.rating}</td>
               </tr>
             ))}
           </MDBTableBody>

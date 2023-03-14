@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Admin from "./components/Admin";
 import RequiredAuth from "./components/RequiredAuth";
 import Unauthorized from "./components/Unauthorized";
+import RateArtist from "./components/RateArtist";
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
         </Route>
         <Route element={<RequiredAuth allowedRoles={["user"]} />}>
           <Route path="/" element={<Home />} />
+        </Route>
+        <Route element={<RequiredAuth allowedRoles={["user"]} />}>
+          <Route path="/rate" element={<RateArtist />} />
         </Route>
         {/* catch all*/}
       </Route>
