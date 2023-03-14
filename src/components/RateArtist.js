@@ -1,8 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "../api/axios";
 import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const RateArtist = () => {
+  const { auth } = useAuth();
+  console.log(auth?.id);
+  const username = useRef(auth.username);
+
   const [artistData, setArtistData] = useState([]);
   const [optionValue, setOptionValue] = useState("");
   const [artistRating, setArtistRating] = useState(0);
@@ -10,11 +15,21 @@ const RateArtist = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(JSON.stringify({ name: optionValue, rating: artistRating }));
+    console.log(
+      JSON.stringify({
+        username: username.current,
+        name: optionValue,
+        rating: artistRating,
+      })
+    );
     try {
       const response = await axios.post(
         RATE_URL,
-        JSON.stringify({ name: optionValue, rating: artistRating }),
+        JSON.stringify({
+          username: username,
+          name: optionValue,
+          rating: artistRating,
+        }),
         {
           headers: { "Content-Type": "application/json" },
 

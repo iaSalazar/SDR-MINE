@@ -41,6 +41,82 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Rate Artist Test",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"name\":\"jcole\",\n    \"rating\":3.0,\n    \"username\":\"ivan\"}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/artists/rate",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"artists",
+						"rate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Artist Test Copy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"name\":\"ivan\",\n    \"lastName\":\"ivan\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/artists",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"artists"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
