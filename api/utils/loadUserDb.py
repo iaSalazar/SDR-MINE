@@ -6,7 +6,8 @@ import numpy as np
 import pandas as pd
 import requests
 # add 992 unique users to the db
-users = pd.read_csv('./preprocessed_user_item_rating.csv')
+users = pd.read_csv('api/utils/preprocessed_user_item_rating.csv')
+
 
 users_filtered = users.userid.unique()  # [:2]
 df = pd.DataFrame(users_filtered, columns=['username'])
