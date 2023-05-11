@@ -25,3 +25,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 item-item-knn.pkl
+persited_predictions_df.parquet
